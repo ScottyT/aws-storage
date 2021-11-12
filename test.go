@@ -1,16 +1,9 @@
 package main
 
 import (
-	"aws-storage/middleware"
-	"bytes"
-	"fmt"
 	"log"
-	"net/http"
 	"os"
-	"path/filepath"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/joho/godotenv"
 )
 
@@ -28,7 +21,8 @@ func LoadEnv() {
 		os.Exit(1)
 	}
 }
-func main() {
+
+/* func main() {
 	if len(os.Args) != 2 {
 		exitErrorf("Bucket name required\nUsage: go run", os.Args[0], "BUCKET")
 	}
@@ -82,4 +76,4 @@ func uploadFileToS3(s3Client *s3.S3, bucketName string, filePath string) error {
 	})
 	fmt.Print("error here:", err)
 	return err
-}
+} */

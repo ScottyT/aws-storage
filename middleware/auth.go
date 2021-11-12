@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/rhnvrm/simples3"
 )
 
 var AccessKeyID string
@@ -51,14 +52,18 @@ func ConnectAws() *session.Session {
 	if err != nil {
 		panic(err)
 	}
-
 	return sess
 }
 func Authenticate(c *gin.Context) {
 	LoadEnv()
+	MyBucket = GetEnvWithKey("BUCKET_NAME")
 	AccessKeyID = GetEnvWithKey("AWS_ACCESS_KEY_ID")
 	SecretAccessKey = GetEnvWithKey("AWS_SECRET_ACCESS_KEY")
+	MyRegion = GetEnvWithKey("AWS_REGION")
+	s := simples3.New(MyRegion, AccessKeyID, SecretAccessKey)
 
+	c.Set("Sign", s)
+	c.Next()
 }
 func UpdateBucket(c *gin.Context) {
 	//permission := "READ"

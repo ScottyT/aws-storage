@@ -17,12 +17,13 @@ func main() {
 	router := gin.Default()
 	router.Use(func(c *gin.Context) {
 		c.Set("sess", sess)
-		c.Next()
 	})
-	router.POST("/upload", routes.UploadImage)
+	router.Use(middleware.Authenticate)
+	router.POST("/upload", routes.UploadTest)
 	router.LoadHTMLGlob("templates/*")
 	router.GET("/images", routes.ListImages)
 	router.GET("/image", routes.ListImage)
+	router.POST("/download", gin.WrapF(routes.DownloadObjects))
 
-	_ = router.Run(":8082")
+	_ = router.Run(":8090")
 }

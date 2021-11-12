@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+{{ define "templates/index.tmpl" }}
 <html lang="en">
   <head>
     <title>File</title>
   </head>
   <body>
-    <img src="https://code-red-storage.s3.amazonaws.com/1ad56663af6534d929ad85d1f030e907.jpg" />
+    <img src="https://code-red-storage.s3.amazonaws.com/{{.url}}" />
   </body>
 </html>
+{{end}}
